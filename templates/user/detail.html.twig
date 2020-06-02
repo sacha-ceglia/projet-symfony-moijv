@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'utilisateur {{ user.username }}{% endblock %}
+
+{% block body %}
+    <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+    <h2>{{ user.username }}</h2>
+{#    <p>{{ user.email }}</p>#}
+    <p>Produits proposés par l'utilisateur : </p>
+    <ul>
+        {% for product in user.products %}
+            <li>
+                <a href="{{ path('product', {id : product.id}) }}">{{ product.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
