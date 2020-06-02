@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ProductFixtures extends Fixture
+class ProductFixtures extends Fixture implements DependentFixtureInterface
 {
     const NB_PRODUCTS = 50;
 
@@ -19,12 +20,19 @@ class ProductFixtures extends Fixture
                 ->setDescription("Ma super description $i")
                 ->setPrice(random_int(100, 100000))
                 ->setRef(substr(str_shuffle(md5(random_int(0, 1000000))), 0, 25))
-                ->setUser($this->getReference('user' . random_int(0, UserFixtures::NB_USER)))
+                ->setUser($this->getReference('user' . random_int(0, UserFixtures::NB_USER - 1)))
             ;
 
             $manager->persist($product);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }

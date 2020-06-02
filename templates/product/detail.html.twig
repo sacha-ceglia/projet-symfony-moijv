@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+    <h1>Détails du produit {{ product.name }}</h1>
+    <p>Ref : {{ product.ref }}</p>
+    <p>
+        {{ product.description }}
+    </p>
+    <p>{{ (product.price/100) | format_currency('EUR', locale="fr") }}</p>
+    <p>proposé par {{ product.user.username }}</p>
+{% endblock %}
