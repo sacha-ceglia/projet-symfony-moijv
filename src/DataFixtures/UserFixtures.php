@@ -27,6 +27,8 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+//        $user = new User();
+//        $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
         for($i = 0; $i<self::NB_USER; $i++) {
             $user = new User();
 

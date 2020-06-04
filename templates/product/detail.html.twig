@@ -11,4 +11,7 @@
     </p>
     <p>{{ (product.price/100) | format_currency('EUR', locale="fr") }}</p>
     <p>proposé par <a href="{{ path('user', { id: product.user.id }) }}">{{ product.user.username }}</a></p>
+    {% for tag in product.tags %}
+        <a href="{{ path('products_by_tag', { slug: tag.slug }) }}" class="badge badge-info">#{{ tag.name }}</a>
+    {% endfor %}
 {% endblock %}
