@@ -6,15 +6,16 @@
 {% endblock %}
 
 {% block title %}
-    Ajouter un produit
+    {% if app.request.get('_route') == "edit_product" %}Editer{% else %}Ajouter{% endif %} un produit
 {% endblock %}
 
 {% block body %}
-    <h1>Ajouter un produit</h1>
+    <h1>{% if app.request.get('_route') == "edit_product" %}Editer{% else %}Ajouter{% endif %} un produit</h1>
     {{ form(form) }}
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{ asset('js/select2.full.min.js') }}"></script>
-<script src="{{ asset('js/select2.fr.js') }}"></script>
+    <script src="{{ asset('js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('js/select2.fr.js') }}"></script>
+    <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
 {% endblock %}
