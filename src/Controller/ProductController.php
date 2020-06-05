@@ -47,7 +47,9 @@ class ProductController extends AbstractController
         if( $product === null) {
             $product = new Product();
         }
-        $form = $this->createForm(ProductType::class, $product); // => App\Form\ProductType
+        $form = $this->createForm(ProductType::class, $product /*, [
+            'validation_groups' => ['Default', $product->getId() ? 'add' : "edit"]
+        ]*/); // => App\Form\ProductType
         $form->add('submit', SubmitType::class, [
             'label' => ($product->getId() ? "Editer" : "Ajouter") . " votre produit"
         ]);
@@ -86,5 +88,16 @@ class ProductController extends AbstractController
             'tag' => $tag,
 //            'products' => $products
         ]);
+    }
+
+    /**
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * @Route("/product/delete/{id<\d+>}", name="delete_product")
+     */
+    public function deleteProduct(EntityManagerInterface $objectManager, Product $product)
+    {
+        $objectManager->remove($product);
+        $objectManager->flush();
+        return $this->redirectToRoute('profile');
     }
 }
