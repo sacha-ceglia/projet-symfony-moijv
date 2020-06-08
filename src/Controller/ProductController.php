@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\Tag;
 use App\Form\ProductType;
@@ -99,5 +100,15 @@ class ProductController extends AbstractController
         $objectManager->remove($product);
         $objectManager->flush();
         return $this->redirectToRoute('profile');
+    }
+
+    /**
+     * @Route("product/category/{slug}")
+     */
+    public function getProductByCategory(Category $category)
+    {
+        return $this->render('product/products_by_category.html.twig', [
+            'category' => $category
+        ]);
     }
 }

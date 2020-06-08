@@ -29,6 +29,12 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 $product->addTag($this->getReference("tag$tagIndex"));
             }
 
+            $slugs = array_keys(CategoryFixtures::CATEGORIES);
+            $slugCategory = $slugs[random_int(0, count($slugs) - 1)];
+            $category = $this->getReference('category_'.$slugCategory);
+
+            $product->setCategory($category);
+
             $manager->persist($product);
         }
 
@@ -39,7 +45,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
-            TagFixtures::class
+            TagFixtures::class,
+            CategoryFixtures::class
         ];
     }
 }
