@@ -39,6 +39,7 @@ class ProductType extends AbstractType
                     'placeholder' => "Saisir votre description"
                 ]
             ])
+            ->add('category')
             ->add('tags', Select2EntityType::class, [
                 'class' => Tag::class,
                 'multiple' => true,

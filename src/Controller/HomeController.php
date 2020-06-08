@@ -17,7 +17,8 @@ class HomeController extends AbstractController
     {
         // $products = $pdo->query("SELECT * FROM product")->fetchAll();
 //        $products = $productRepository->findAll();
-        $products = $productRepository->findBy([], [], 6);
+        // SELECT * FROM product ORDER id DESC LIMIT 6
+        $products = $productRepository->findBy([], ['id' => 'DESC'], 6);
         return $this->render('home/index.html.twig', [
             'productList' => $products,
         ]);
