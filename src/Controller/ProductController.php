@@ -103,7 +103,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("product/category/{slug}")
+     * @Route("product/category/{slug}", name="products_by_category")
      */
     public function getProductByCategory(Category $category)
     {
