@@ -79,15 +79,15 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/tag/{slug}", name="products_by_tag")
      */
-    public function productsByTag(Tag $tag/*, ProductRepository $productRepository*/) {
+    public function productsByTag(Tag $tag, ProductRepository $productRepository) {
         // SELECT * FROM products
         // RIGHT JOIN product_tag ON product_tag.product_id = products.id
         // WHERE product_tag.tag_id = :tag_id
 //        $products = $productRepository->findByTag($tag);
-
+        $products = $productRepository->findByTagWithAverageNote($tag);
         return $this->render('product/products_by_tag.html.twig', [
             'tag' => $tag,
-//            'products' => $products
+            'products' => $products
         ]);
     }
 
@@ -105,10 +105,12 @@ class ProductController extends AbstractController
     /**
      * @Route("product/category/{slug}", name="products_by_category")
      */
-    public function getProductByCategory(Category $category)
+    public function getProductByCategory(Category $category, ProductRepository $productRepository)
     {
+        $products = $productRepository->findByCategoryWithAverageNote($category);
         return $this->render('product/products_by_category.html.twig', [
-            'category' => $category
+            'category' => $category,
+            'products' => $products
         ]);
     }
 }

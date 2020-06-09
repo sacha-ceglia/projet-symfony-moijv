@@ -24,6 +24,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             ;
 
             $nb_tags = random_int(1, 5);
+
             for($j = 0; $j < $nb_tags; $j++) {
                 $tagIndex = random_int(0, TagFixtures::NB_TAGS - 1);
                 $product->addTag($this->getReference("tag$tagIndex"));
@@ -34,6 +35,8 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $category = $this->getReference('category_'.$slugCategory);
 
             $product->setCategory($category);
+
+            $this->addReference('product'.$i, $product);
 
             $manager->persist($product);
         }

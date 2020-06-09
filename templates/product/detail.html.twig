@@ -17,4 +17,15 @@
     {% if is_granted('IS_AUTHENTICATED_FULLY') and product.user == app.user %}
         <a class="btn btn-primary" href="{{ path('edit_product', {id : product.id}) }}">Modifier le produit</a>
     {% endif %}
+    <div class="comments">
+        {% for comment in product.comments %}
+            <div class="row">
+                <div class="col-3"><img class="img-fluid" src="" alt=""></div>
+                <div class="col-9 comment">{{ comment.text }}</div>
+            </div>
+            <div>
+                {{ comment.date.format('d/m/Y H:i:s') }}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

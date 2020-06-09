@@ -4,5 +4,5 @@
 
 {% block body %}
     <h1>Liste des produits associés au tag {{ tag.name }}</h1>
-    {% include 'incs/product_list.html.twig' with { productList : tag.products } %}
+    {% include 'incs/product_list.html.twig' with { productList : products } %}
 {% endblock %}

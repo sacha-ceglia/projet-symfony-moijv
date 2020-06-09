@@ -10,7 +10,8 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            {% for product in productList[0:3] %}
+            {% for p in productList[0:3] %}
+                {% set product = p[0] %}
             <div class="carousel-item{% if loop.first %} active{% endif %}">
                 {% set product_image = vich_uploader_asset(product, 'imageFile') ? vich_uploader_asset(product, 'imageFile') : 'http://placehold.it/900x350' %}
                 <img class="d-block img-fluid" src="{{ product_image }}" alt="First slide">
